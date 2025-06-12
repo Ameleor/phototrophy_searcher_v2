@@ -1,20 +1,22 @@
-import os
 import pandas as pd
+import os
 import sys
 
 # Getting the name of each genome thanks to the snakefile
 genome = sys.argv[1]
+dir_in = sys.argv[2]
+dir_out = sys.argv[3]
 
 # Read of the ouput necessary
-data_genome = "data/genomes/" + genome + "/"
-results_genome = 'results/genomes/' + genome + '/PGCfinder/'
+data_genome = os.path.join(dir_in, genome)
+results_genome = os.path.join(dir_out, genome, 'PGCfinder')
 
 # Try to pass all the genome that don't have a PGC found by PGCfinder
 try:
     # Read of the necessary files that exist
-    best_solution = pd.read_csv(results_genome + 'best_solution.tsv', sep='\t', comment='#')
-    best_solution_summary = pd.read_csv(results_genome + 'best_solution_summary.tsv', sep='\t', comment='#', index_col=0)
-    genome_gff = pd.read_csv(data_genome + genome + "_protein_gff.tsv.gz", sep='\t')
+    best_solution = pd.read_csv(os.path.join(results_genome, 'best_solution.tsv'), sep='\t', comment='#')
+    best_solution_summary = pd.read_csv(os.path.join(results_genome, 'best_solution_summary.tsv'), sep='\t', comment='#', index_col=0)
+    genome_gff = pd.read_csv(os.path.join(data_genome, genome)+"_protein_gff.tsv.gz", sep='\t')
 
     # Getting the number of genes hit for each PGC
     nbr_genes_hit = best_solution.shape[0]

@@ -1,4 +1,4 @@
-dataset: "sample_NCBI_2025"
+dataset: "2025-04-NCBI-eubacteria_standardized"
 dir_in: "data"
 dir_out: "results"
 timeout: 30

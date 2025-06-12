@@ -1,0 +1,4 @@
+dataset: "sample_NCBI_2025"
+dir_in: "data"
+dir_out: "results"
+timeout: 30
